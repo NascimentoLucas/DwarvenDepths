@@ -6,12 +6,14 @@ namespace Nascimento.Game.Minion
 
     public class MinionController : MonoBehaviour
     {
-
+        private const string SpeedKey = "Speed";
         [Header("Setup")]
         [SerializeField]
         private SpriteRenderer _charSprite;
         [SerializeField]
         private MinionAttributes _attr;
+        [SerializeField]
+        private Animator _animator;
 
 
         private Vector3 _floorMin;
@@ -45,6 +47,11 @@ namespace Nascimento.Game.Minion
             if (Vector3.Distance(transform.position, _currentTarget) < 0.1f)
             {
                 _currentTarget = Vector3.zero;
+                _animator.SetFloat(SpeedKey, 0);
+            }
+            else
+            {
+                _animator.SetFloat(SpeedKey, 1);
             }
         }
 

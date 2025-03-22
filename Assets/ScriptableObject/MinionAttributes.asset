@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4108ba9134d3ed439dc25ff44ca5b95, type: 3}
   m_Name: MinionAttributes
   m_EditorClassIdentifier: 
-  <Speed>k__BackingField: 2
+  <Speed>k__BackingField: 1
   <MaxDelay>k__BackingField: 3

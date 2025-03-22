@@ -337,6 +337,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _charSprite: {fileID: 708269069}
   _attr: {fileID: 11400000, guid: 10ba1c738cd76b641966ee2e4d600139, type: 2}
+  _animator: {fileID: 708269070}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
