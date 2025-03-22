@@ -15,7 +15,7 @@ namespace Nascimento.Game
         [SerializeField]
         private float _smoothTime = 0.1f;
 
-        [Header("Design")]
+        [Header("Debug")]
         [SerializeField]
         private Vector3 _startPosition;
         [SerializeField]
@@ -48,18 +48,21 @@ namespace Nascimento.Game
                     _targetPosition += new Vector3(0, delta.y, 0) * _scrollMultiplier;
                 }
             }
-
-            if (_targetPosition.y < _startPosition.y)
+            else
             {
-                _targetPosition = _startPosition;
+                if (_transformToMove.position.y < _startPosition.y)
+                {
+                    _targetPosition = _startPosition;
+                }
+
+                if (_transformToMove.position.y > _endPosition.y)
+                {
+                    _targetPosition = _endPosition;
+                }
             }
 
-            if (_targetPosition.y > (_startPosition + _endPosition).y)
-            {
-                _targetPosition = _endPosition;
-            }
 
-            // Smoothly move to target position
+
             _transformToMove.position = Vector3.SmoothDamp(
                 _transformToMove.position,
                 _targetPosition,
@@ -70,7 +73,18 @@ namespace Nascimento.Game
         internal void SetBottomItem(Transform bottomItem)
         {
             _endPosition = _startPosition;
-            _endPosition.y = Vector3.Distance(_startPosition, bottomItem.position);
+            _endPosition.y += Vector3.Distance(_startPosition, bottomItem.position);
         }
+
+
+#if UNITY_EDITOR
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawSphere(_startPosition, 0.1f);
+            Gizmos.color = Color.red;
+            Gizmos.DrawSphere(_endPosition, 0.1f);
+        }
+#endif
     }
 }
