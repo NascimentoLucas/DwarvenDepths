@@ -5,6 +5,7 @@ using UnityEngine;
 namespace Nascimento.Game
 {
 
+
     public class LevelController : MonoBehaviour
     {
         [Header("Setup")]
@@ -23,7 +24,7 @@ namespace Nascimento.Game
             float cameraHeight = cam.orthographicSize * 2f;
             float cameraWidth = cameraHeight * cam.aspect;
             float width = cameraWidth / spriteWidth * _attr.LevelWidthPadding;
-            transform.localScale = new Vector3(width, transform.localScale.y, transform.localScale.z);
+            _background.transform.localScale = new Vector3(width, _background.transform.localScale.y, _background.transform.localScale.z);
         }
     }
 }
