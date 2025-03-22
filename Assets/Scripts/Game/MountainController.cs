@@ -4,15 +4,21 @@ namespace Nascimento.Game
 {
 
 
+
+
     public class MountainController : MonoBehaviour
     {
-        [Header("Setup")]
+        [Header("Setup.Spwan")]
         [SerializeField]
         private LevelController _prefab;
         [SerializeField]
         private Transform _container;
         [SerializeField]
         private Transform _start;
+
+        [Header("Setup")]
+        [SerializeField]
+        private ScrollManager _scrollManager;
 
         [Header("Design")]
         [SerializeField]
@@ -27,7 +33,10 @@ namespace Nascimento.Game
                 LevelController level = Instantiate(_prefab, _container);
                 level.transform.position = levelPos;
                 levelPos -= new Vector3(0, level.Size, 0);
+                level.name = $"Level {i}";
             }
+
+            _scrollManager.SetBottomItem(_container.GetChild(_container.childCount - 1));
         }
 
 
