@@ -24,7 +24,8 @@ namespace Nascimento.Game
             float cameraHeight = cam.orthographicSize * 2f;
             float cameraWidth = cameraHeight * cam.aspect;
             float width = cameraWidth / spriteWidth * _attr.LevelWidthPadding;
-            _background.transform.localScale = new Vector3(width, _background.transform.localScale.y, _background.transform.localScale.z);
+            float ratio = width / _background.transform.localScale.x;
+            _background.transform.localScale = new Vector3(width, _background.transform.localScale.y * ratio, _background.transform.localScale.z);
         }
     }
 }
