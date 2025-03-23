@@ -43,5 +43,13 @@ namespace Nascimento.Game
                 minion.SetHandler(this);
             }
         }
+
+#if UNITY_EDITOR
+        void OnDrawGizmos()
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, 1f);
+        }
+#endif
     }
 }

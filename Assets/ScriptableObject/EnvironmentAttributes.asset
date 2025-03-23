@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3ed8369a2436bd438f09a03404693d7, type: 3}
   m_Name: EnvironmentAttributes
   m_EditorClassIdentifier: 
-  LevelWidthPadding: 1.01
+  LevelWidthPadding: 1
