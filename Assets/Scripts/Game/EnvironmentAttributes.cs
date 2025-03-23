@@ -6,5 +6,7 @@ namespace Nascimento.Game
     public class EnvironmentAttributes : ScriptableObject
     {
         public float LevelWidthPadding = 1.01f;
+
+        public float Delay { get; internal set; } = 1;
     }
 }

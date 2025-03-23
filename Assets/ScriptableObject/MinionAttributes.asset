@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <TranslationTime>k__BackingField: 5
   <MaxDelay>k__BackingField: 3
+  <MinWalkDistance>k__BackingField: 0.2
+  _walkDistance: 5
   _movementValue:
     serializedVersion: 2
     m_Curve:

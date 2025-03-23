@@ -1,28 +1,37 @@
-using System.Collections.Generic;
 using Nascimento.Model;
 using UnityEngine;
+using System.Collections.Generic;
 
 namespace Nascimento.Game.Mountain
 {
-
     public partial class MountainController : MonoBehaviour
     {
         [Header("Setup")]
         [SerializeField]
         private LevelSO[] _levelSO;
+        [SerializeField]
+        private ScrollManager _scrollManager;
+        [SerializeField]
+        private EnvironmentAttributes _env;
+
+
+        [Header("Setup.Spaw")]
 
         [SerializeField]
         private Transform _content;
         [SerializeField]
         private Transform _spawnPoint;
-        [SerializeField]
-        private ScrollManager _scrollManager;
 
 
+        private MountainBagController _bag;
         private LevelController[] _levels;
 
-        void Start()
+        private float _timer;
+        private float _delay = 1f;
+
+        public void Start()
         {
+            _bag = new MountainBagController();
             _levels = new LevelController[_levelSO.Length];
             var sortedLevels = new List<LevelSO>();
             sortedLevels.AddRange(_levelSO);
@@ -32,7 +41,7 @@ namespace Nascimento.Game.Mountain
             for (int i = 0; i < sortedLevels.Count; i++)
             {
                 var level = Instantiate(sortedLevels[i].Prefab, _content);
-                level.Setup();
+                level.Setup(sortedLevels[i]);
                 level.transform.position = _spawnPoint.position;
                 level.name = sortedLevels[i].name;
                 _levels[i] = level;
@@ -47,6 +56,25 @@ namespace Nascimento.Game.Mountain
                 position.x = _spawnPoint.position.x;
             }
             _scrollManager.SetBottomItem(_levels[_levels.Length - 1].transform);
+        }
+
+        private void Update()
+        {
+            _timer += Time.deltaTime;
+
+            if (_timer >= _env.Delay)
+            {
+                UpdateMountain();
+                _timer = 0f;
+            }
+        }
+
+        private void UpdateMountain()
+        {
+            for (int i = 0; i < _levels.Length; i++)
+            {
+                _levels[i].CraftItem(_bag);
+            }
         }
     }
 }
