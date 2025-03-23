@@ -16,7 +16,7 @@ namespace Nascimento.Game
 
         [Header("Setup")]
         [SerializeField]
-        private MinionController _minion;
+        private MinionController[] _minions;
 
         [SerializeField]
         private EnvironmentAttributes _attr;
@@ -37,7 +37,10 @@ namespace Nascimento.Game
             float ratio = width / _background.transform.localScale.x;
             _background.transform.localScale = new Vector3(width, _background.transform.localScale.y * ratio, _background.transform.localScale.z);
 
-            _minion.Patrol(FloorMin, FloorMax);
+            foreach (var minion in _minions)
+            {
+                minion.Patrol(FloorMin, FloorMax, FloorCenter);
+            }
         }
 
 
