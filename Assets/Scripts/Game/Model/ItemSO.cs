@@ -24,13 +24,37 @@ namespace Nascimento.Model
         [field: SerializeField]
         public string Name { get; private set; }
 
-        [field: SerializeField]
-        public string Description { get; private set; }
+        [SerializeField]
+        private string _descriptionText;
 
         [field: SerializeField]
         public Sprite Icon { get; private set; }
         [field: SerializeField]
         public ItemData[] Components { get; private set; }
+
+
+        public string Description
+        {
+            get
+            {
+                string s;
+                if (Components.Length > 0)
+                {
+                    var args = new List<object> { Name };
+                    foreach (var component in Components)
+                    {
+                        args.Add(component.Item.name);
+                    }
+                    s = string.Format(_descriptionText, args.ToArray());
+                }
+                else
+                {
+                    s = string.Format(_descriptionText, Name);
+                }
+
+                return s;
+            }
+        }
 
     }
 }
