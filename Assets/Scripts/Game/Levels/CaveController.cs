@@ -19,10 +19,10 @@ namespace Nascimento.Game
         public float Size => _background.bounds.size.y;
 
 
-        public void Setup(EnvironmentAttributes attr)
+        public float Setup(EnvironmentAttributes attr)
         {
             Camera cam = Camera.main;
-            if (cam == null) return;
+            if (cam == null) return 1;
 
 
             float spriteWidth = _root.bounds.size.x;
@@ -31,6 +31,8 @@ namespace Nascimento.Game
             float width = cameraWidth / spriteWidth * attr.LevelWidthPadding;
             float ratio = width / _root.transform.localScale.x;
             _root.transform.localScale = new Vector3(width, _root.transform.localScale.y * ratio, _root.transform.localScale.z);
+
+            return ratio;
         }
 
 

@@ -1,7 +1,7 @@
 using Nascimento.Model;
 using UnityEngine;
 
-namespace Nascimento.Game
+namespace Nascimento.Game.Level.Controller
 {
     public class LevelItemCraft
     {

@@ -1,4 +1,4 @@
-using Nascimento.Game;
+using Nascimento.Game.Level.Controller;
 using UnityEngine;
 
 namespace Nascimento.Model

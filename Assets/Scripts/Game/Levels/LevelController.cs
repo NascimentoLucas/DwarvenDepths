@@ -4,8 +4,9 @@ using System.Collections.Generic;
 using Nascimento.Game.Minion;
 using Nascimento.Model;
 using UnityEngine;
+using Nascimento.Game.Level.View;
 
-namespace Nascimento.Game
+namespace Nascimento.Game.Level.Controller
 {
     public interface ICraftHandler
     {
@@ -18,9 +19,8 @@ namespace Nascimento.Game
         [Header("Setup")]
         [SerializeField]
         private CaveController _cave;
-
         [SerializeField]
-        private MinionController[] _minions;
+        private LevelView _levelView;
 
         [SerializeField]
         private EnvironmentAttributes _attr;
@@ -48,11 +48,8 @@ namespace Nascimento.Game
         {
             _levelSO = levelSO;
             _levelItemCraft = new LevelItemCraft(_levelSO.Item);
-            _cave.Setup(_attr);
-            foreach (var minion in _minions)
-            {
-                minion.SetHandler(this);
-            }
+            var ratio = _cave.Setup(_attr);
+            _levelView.Setup(ratio);
         }
 
         internal void CraftItem(ICraftHandler handler)
