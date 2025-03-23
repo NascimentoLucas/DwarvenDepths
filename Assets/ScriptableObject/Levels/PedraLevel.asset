@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: PedraLevel
   m_EditorClassIdentifier: 
   <Item>k__BackingField: {fileID: 11400000, guid: 4b73e92c21ac49b49a15675b07e74a95, type: 2}
-  <_prefab>k__BackingField: {fileID: 7205253927726040678, guid: 734efa34848500b45b4b9e200ce9d700, type: 3}
-  <minLvl>k__BackingField: 0
-  <maxLvl>k__BackingField: 4294967295
+  <Prefab>k__BackingField: {fileID: 7205253927726040678, guid: 734efa34848500b45b4b9e200ce9d700, type: 3}
+  <MinLvl>k__BackingField: 0
+  <MaxLvl>k__BackingField: 4294967295
