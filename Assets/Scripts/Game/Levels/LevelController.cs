@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Nascimento.Game
 {
 
-    public class LevelController : MonoBehaviour
+    public class LevelController : MonoBehaviour, IMinionCHandler
     {
         [Header("Setup")]
         [SerializeField]
@@ -20,13 +20,27 @@ namespace Nascimento.Game
 
         public CaveController Cave => _cave;
 
+        public Vector3 GetFloorCenter()
+        {
+            return _cave.FloorCenter;
+        }
+
+        public Vector3 GetFloorMax()
+        {
+            return _cave.FloorMax;
+        }
+
+        public Vector3 GetFloorMin()
+        {
+            return _cave.FloorMin;
+        }
 
         public void Setup()
         {
             _cave.Setup(_attr);
             foreach (var minion in _minions)
             {
-                minion.Patrol(_cave.FloorMin, _cave.FloorMax, _cave.FloorCenter);
+                minion.SetHandler(this);
             }
         }
     }

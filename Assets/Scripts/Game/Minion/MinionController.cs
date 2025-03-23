@@ -4,6 +4,13 @@ using UnityEngine;
 namespace Nascimento.Game.Minion
 {
 
+    public interface IMinionCHandler
+    {
+        public Vector3 GetFloorMin();
+        public Vector3 GetFloorMax();
+        public Vector3 GetFloorCenter();
+    }
+
     public class MinionController : MonoBehaviour
     {
         private const string SpeedKey = "Speed";
@@ -16,9 +23,6 @@ namespace Nascimento.Game.Minion
         private Animator _animator;
 
 
-        private Vector3 _floorMin;
-        private Vector3 _floorMax;
-        private Vector3 _floorCenter;
         private Vector3 _currentTarget;
         private Vector3 _startPosition;
 
@@ -26,9 +30,12 @@ namespace Nascimento.Game.Minion
         private float _currentWaitTime;
         private float _lerpTime;
         private float _currentLerpTime;
+        private IMinionCHandler _handler;
 
         void Update()
         {
+            if (_handler == null) return;
+
             if (_currentTarget == Vector3.zero)
             {
                 if (_currentWaitTime <= 0)
@@ -59,16 +66,16 @@ namespace Nascimento.Game.Minion
 
         private void GenerateNewTarget()
         {
-            float randomX = UnityEngine.Random.Range(_floorMin.x, _floorMax.x);
-            float randomY = UnityEngine.Random.Range(_floorMin.y, _floorMax.y);
+            float randomX = UnityEngine.Random.Range(_handler.GetFloorMin().x, _handler.GetFloorMax().x);
+            float randomY = UnityEngine.Random.Range(_handler.GetFloorMin().y, _handler.GetFloorMax().y);
             _currentTarget = new Vector3(randomX, randomY, _charSprite.transform.position.z);
             _waitTime = UnityEngine.Random.Range(0.5f, _attr.MaxDelay);
             _currentWaitTime = _waitTime;
 
             // Reset lerp values when setting new target
             _startPosition = _charSprite.transform.position;
-            _startPosition.y = _floorCenter.y;
-            _currentTarget.y = _floorCenter.y;
+            _startPosition.y = _handler.GetFloorCenter().y;
+            _currentTarget.y = _handler.GetFloorCenter().y;
             _lerpTime = UnityEngine.Random.Range(1f, _attr.Speed);
             _currentLerpTime = 0;
 
@@ -86,11 +93,9 @@ namespace Nascimento.Game.Minion
             _charSprite.transform.localScale = scale;
         }
 
-        internal void Patrol(Vector3 floorMin, Vector3 floorMax, Vector3 center)
+        internal void SetHandler(IMinionCHandler handler)
         {
-            _floorMin = floorMin;
-            _floorMax = floorMax;
-            _floorCenter = center;
+            _handler = handler;
         }
     }
 }

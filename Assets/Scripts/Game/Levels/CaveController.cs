@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace Nascimento.Game
 {
+
     public class CaveController : MonoBehaviour
     {
         [Header("Setup.SpriteRenderer")]

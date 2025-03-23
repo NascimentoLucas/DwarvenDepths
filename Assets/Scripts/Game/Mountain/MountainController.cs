@@ -1,5 +1,5 @@
+using System.Collections.Generic;
 using Nascimento.Model;
-using TMPro.EditorUtilities;
 using UnityEngine;
 
 namespace Nascimento.Game.Mountain
@@ -24,18 +24,21 @@ namespace Nascimento.Game.Mountain
         void Start()
         {
             _levels = new LevelController[_levelSO.Length];
-            for (int i = 0; i < _levelSO.Length; i++)
+            var sortedLevels = new List<LevelSO>();
+            sortedLevels.AddRange(_levelSO);
+            sortedLevels.Sort((a, b) => a.MinLvl.CompareTo(b.MinLvl));
+
+
+            for (int i = 0; i < sortedLevels.Count; i++)
             {
-                var level = Instantiate(_levelSO[i].Prefab, _content);
+                var level = Instantiate(sortedLevels[i].Prefab, _content);
                 level.Setup();
                 level.transform.position = _spawnPoint.position;
-                level.name = _levelSO[i].name;
+                level.name = sortedLevels[i].name;
                 _levels[i] = level;
             }
-        }
 
-        void FixedUpdate()
-        {
+
             Vector3 position = _spawnPoint.position;
             for (int i = 0; i < _levels.Length; i++)
             {
@@ -43,7 +46,6 @@ namespace Nascimento.Game.Mountain
                 position.y = _levels[i].Cave.FloorCenter.y;
                 position.x = _spawnPoint.position.x;
             }
-
         }
     }
 }
