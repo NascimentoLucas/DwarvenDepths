@@ -35,11 +35,6 @@ namespace Nascimento.Game.Level.Controller
 
         public void GetItem(ICraftHandler handler)
         {
-            if (_item.Log)
-            {
-                Debug.Log($"Crafting {_item.Name} - Step {_steps}");
-            }
-
             for (int i = 0; i < _craftItems.Length; i++)
             {
                 if (_craftItems[i].AmountHave < _craftItems[i].AmountNeed)
@@ -52,10 +47,6 @@ namespace Nascimento.Game.Level.Controller
                     }
                     else
                     {
-                        if (_item.Log)
-                        {
-                            Debug.Log($"Failed to craft {_item.Name} - doest have {i}");
-                        }
                         _steps = 0;
                         return;
                     }
@@ -64,10 +55,6 @@ namespace Nascimento.Game.Level.Controller
             }
 
             _steps++;
-            if (_item.Log)
-            {
-                Debug.Log($"Crafted {_item.Name} - Step {_steps}");
-            }
             if (_steps >= _item.Steps)
             {
                 _steps = 0;
@@ -76,10 +63,6 @@ namespace Nascimento.Game.Level.Controller
                     _craftItems[i].AmountHave = 0;
                 }
                 handler.AddItem(_item, 1);
-                if (_item.Log)
-                {
-                    Debug.Log($"Crafted {_item.Name} - Step {_steps}");
-                }
             }
         }
     }

@@ -14,13 +14,15 @@ namespace Nascimento.Game.Level.Controller
         public void AddItem(ItemSO item, int amount);
     }
 
-    public class LevelController : MonoBehaviour, IMinionCHandler
+    public class LevelController : MonoBehaviour, IMinionCHandler, ILevelViewHandler
     {
         [Header("Setup")]
         [SerializeField]
         private CaveController _cave;
         [SerializeField]
         private LevelView _levelView;
+        [SerializeField]
+        private MinionController _prefabMinion;
 
         [SerializeField]
         private EnvironmentAttributes _attr;
@@ -44,12 +46,18 @@ namespace Nascimento.Game.Level.Controller
             return _cave.FloorMin;
         }
 
+        public void OnButtonPressed()
+        {
+            var minion = Instantiate(_prefabMinion, transform);
+            minion.SetHandler(this);
+        }
+
         public void Setup(LevelSO levelSO)
         {
             _levelSO = levelSO;
             _levelItemCraft = new LevelItemCraft(_levelSO.Item);
             var ratio = _cave.Setup(_attr);
-            _levelView.Setup(ratio);
+            _levelView.Setup(ratio, this);
         }
 
         internal void CraftItem(ICraftHandler handler)

@@ -37,10 +37,6 @@ namespace Nascimento.Model
         public uint Steps { get; private set; } = 1;
         [field: SerializeField]
         public ItemData[] Components { get; private set; }
-#if UNITY_EDITOR
-        [field: SerializeField]
-        public bool Log { get; private set; } = false;
-#endif
 
 
         public string Description
