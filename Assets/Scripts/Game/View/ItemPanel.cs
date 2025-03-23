@@ -20,12 +20,12 @@ namespace Nascimento.View
             if (!_items.ContainsKey(item))
             {
                 var itemView = Instantiate(_prefab, _content.transform);
-                itemView.Setup(item.Icon, amount.ToString("00"));
+                itemView.Setup(item.Icon, $"{item.Name}: {amount.ToString("00")}");
                 _items[item] = itemView;
             }
             else
             {
-                _items[item].UpdateText(amount.ToString("00"));
+                _items[item].UpdateText($"{item.Name}: {amount.ToString("00")}");
             }
         }
     }

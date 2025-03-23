@@ -31,17 +31,23 @@ namespace Nascimento.Game.Mountain
             }
         }
 
-        public bool HasItem(ItemSO item, int amount)
+        public bool GetItem(ItemSO item, int amount)
         {
             lock (_lock)
             {
-                if (_items.ContainsKey(item) && _items[item] >= amount)
+                if (_items.ContainsKey(item))
                 {
-                    _items[item] -= amount;
-                    _itemPanel.Setup(item, _items[item]);
-                    return true;
+                    if (_items[item] >= amount)
+                    {
+                        _items[item] -= amount;
+                        _itemPanel.Setup(item, _items[item]);
+                        return true;
+                    }
+                    else
+                    {
+                        _itemPanel.Setup(item, _items[item]);
+                    }
                 }
-                _itemPanel.Setup(item, _items[item]);
                 return false;
             }
         }

@@ -9,7 +9,7 @@ namespace Nascimento.Game
 {
     public interface ICraftHandler
     {
-        public bool HasItem(ItemSO item, int amount);
+        public bool GetItem(ItemSO item, int amount);
         public void AddItem(ItemSO item, int amount);
     }
 
@@ -25,6 +25,7 @@ namespace Nascimento.Game
         [SerializeField]
         private EnvironmentAttributes _attr;
         private LevelSO _levelSO;
+        private LevelItemCraft _levelItemCraft;
 
         public CaveController Cave => _cave;
 
@@ -46,6 +47,7 @@ namespace Nascimento.Game
         public void Setup(LevelSO levelSO)
         {
             _levelSO = levelSO;
+            _levelItemCraft = new LevelItemCraft(_levelSO.Item);
             _cave.Setup(_attr);
             foreach (var minion in _minions)
             {
@@ -55,7 +57,7 @@ namespace Nascimento.Game
 
         internal void CraftItem(ICraftHandler handler)
         {
-            handler.AddItem(_levelSO.Item, 1);
+            _levelItemCraft.GetItem(handler);
         }
 
 #if UNITY_EDITOR
