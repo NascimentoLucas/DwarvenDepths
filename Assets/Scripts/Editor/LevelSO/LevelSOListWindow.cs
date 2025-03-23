@@ -4,13 +4,23 @@ using UnityEditor;
 using System.Collections.Generic;
 using Nascimento.Model;
 using Codice.CM.SEIDInfo;
+using Unity.VisualScripting;
 
 namespace Nascimento.Dev
 {
+
+    public interface IListWindowFilter
+    {
+        bool CanShow(LevelSO levelSO);
+        void CategoryLabel(LevelSO levelSO);
+        void Sort(List<LevelSO> levelSOs);
+    }
+
+
     public class LevelSOListWindow : GuiStyles
     {
         protected GUIStyle _componentPanel;
-        private Vector2 scrollPosition;
+        private IListWindowFilter _filter;
         private List<LevelSO> levelSOs = new List<LevelSO>();
 
         [MenuItem("Dev/" + nameof(LevelSOListWindow))]
@@ -20,6 +30,11 @@ namespace Nascimento.Dev
             w.SetupColor();
         }
 
+        void OnFocus()
+        {
+            RefreshLevelSOs();
+        }
+
         private void OnEnable()
         {
             RefreshLevelSOs();
@@ -27,6 +42,9 @@ namespace Nascimento.Dev
 
         private void RefreshLevelSOs()
         {
+            if (_filter == null)
+                _filter = new StandardListWindowFilter();
+
             SetupColor();
 
             levelSOs.Clear();
@@ -42,6 +60,8 @@ namespace Nascimento.Dev
                     levelSOs.Add(levelSO);
                 }
             }
+
+            _filter.Sort(levelSOs);
         }
 
         private void SetupColor()
@@ -53,22 +73,39 @@ namespace Nascimento.Dev
 
         private void OnGUI()
         {
+
             GUILayout.Label("Level Scriptable Objects", EditorStyles.boldLabel);
+            if (GUILayout.Button("Refresh List"))
+            {
+                RefreshLevelSOs();
+            }
+            UseHorizontal(() =>
+            {
+                if (GUILayout.Button("Remover filtro"))
+                {
+                    _filter = new StandardListWindowFilter();
+                    RefreshLevelSOs();
+                }
+                if (GUILayout.Button("Filtrar multiplos componentes"))
+                {
+                    _filter = new MultipleComponentFilter();
+                    RefreshLevelSOs();
+                }
+            });
 
             UseScroll(() =>
             {
                 try
                 {
-                    if (GUILayout.Button("Refresh List"))
-                    {
-                        RefreshLevelSOs();
-                    }
-
 
                     for (int i = 0; i < levelSOs.Count; i++)
                     {
+                        if (!_filter.CanShow(levelSOs[i])) continue;
+
                         UseVertical(() =>
                         {
+                            _filter.CategoryLabel(levelSOs[i]);
+
                             GUILayout.Label(levelSOs[i].name, EditorStyles.boldLabel);
                             EditorGUILayout.ObjectField(levelSOs[i], typeof(LevelSO), false);
 
@@ -93,11 +130,25 @@ namespace Nascimento.Dev
             });
         }
 
+
+        private void ShowItem(ItemSO item)
+        {
+            UseHorizontal(() =>
+            {
+                EditorGUILayout.ObjectField(item, typeof(ItemSO), false);
+                if (item.Icon != null)
+                {
+                    GUILayout.Label(new GUIContent(item.Icon.texture), GUILayout.Width(32), GUILayout.Height(32));
+                }
+            }, _componentPanel);
+        }
+
         private void ShowItemSO(ItemSO item)
         {
             UseVertical(() =>
             {
-                EditorGUILayout.ObjectField(item, typeof(ItemSO), false);
+                GUILayout.Label($"{item.name}:\n{item.Description}");
+                ShowItem(item);
                 if (item.Components != null &&
                 item.Components.Length > 0)
                 {
@@ -106,9 +157,8 @@ namespace Nascimento.Dev
                     {
                         UseHorizontal(() =>
                         {
-                            EditorGUILayout.ObjectField(item.Components[j].Item, typeof(ItemSO), false);
+                            ShowItem(item.Components[j].Item);
                             EditorGUILayout.LabelField($"Amount: {item.Components[j].Amount}");
-                            //ShowItemSO(item.Components[j].Item);
                         });
                     }
                 }
