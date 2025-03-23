@@ -1,18 +1,31 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class ItemView : MonoBehaviour
+namespace Nascimento.View
 {
-    // Start is called before the first frame update
-    void Start()
+    public class ItemView : MonoBehaviour
     {
-        
-    }
+        [Header("Setup")]
+        [SerializeField]
+        private Image _icon;
+        [SerializeField]
+        private TextMeshProUGUI _text;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public void Setup(Sprite icon, string text)
+        {
+            _icon.sprite = icon;
+            _text.text = text;
+            _text.ForceMeshUpdate();
+        }
+
+        internal void UpdateText(string text)
+        {
+            _text.text = text;
+            _text.ForceMeshUpdate();
+        }
     }
 }

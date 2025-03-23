@@ -1,10 +1,16 @@
 using Nascimento.Model;
 using System.Collections.Generic;
+using UnityEngine;
+using Nascimento.View;
+
 
 namespace Nascimento.Game.Mountain
 {
-    public class MountainBagController : ICraftHandler
+    public class MountainBagController : MonoBehaviour, ICraftHandler
     {
+        [Header("Setup")]
+        [SerializeField] private ItemPanel _itemPanel;
+
         private readonly Dictionary<ItemSO, int> _items = new Dictionary<ItemSO, int>();
         private readonly object _lock = new object();
 
@@ -20,6 +26,8 @@ namespace Nascimento.Game.Mountain
                 {
                     _items[item] = amount;
                 }
+
+                _itemPanel.Setup(item, _items[item]);
             }
         }
 
@@ -30,8 +38,10 @@ namespace Nascimento.Game.Mountain
                 if (_items.ContainsKey(item) && _items[item] >= amount)
                 {
                     _items[item] -= amount;
+                    _itemPanel.Setup(item, _items[item]);
                     return true;
                 }
+                _itemPanel.Setup(item, _items[item]);
                 return false;
             }
         }

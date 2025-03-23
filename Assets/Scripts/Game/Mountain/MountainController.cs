@@ -14,16 +14,17 @@ namespace Nascimento.Game.Mountain
         [SerializeField]
         private EnvironmentAttributes _env;
 
+        [SerializeField]
+        private
+        MountainBagController _bag;
 
-        [Header("Setup.Spaw")]
+
+        [Header("Setup.Spanw")]
 
         [SerializeField]
         private Transform _content;
         [SerializeField]
         private Transform _spawnPoint;
-
-
-        private MountainBagController _bag;
         private LevelController[] _levels;
 
         private float _timer;
@@ -31,7 +32,6 @@ namespace Nascimento.Game.Mountain
 
         public void Start()
         {
-            _bag = new MountainBagController();
             _levels = new LevelController[_levelSO.Length];
             var sortedLevels = new List<LevelSO>();
             sortedLevels.AddRange(_levelSO);

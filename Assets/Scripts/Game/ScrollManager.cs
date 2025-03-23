@@ -32,6 +32,7 @@ namespace Nascimento.Game
             _targetPosition = _transformToMove.position;
             _startPosition = _transformToMove.position;
             _mainCamera = Camera.main;
+            _scrollMultiplier *= 1080f / Screen.height;
         }
 
         private void Update()
