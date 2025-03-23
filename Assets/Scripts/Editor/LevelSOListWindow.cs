@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEditor;
 using System.Collections.Generic;
 using Nascimento.Model;
+using Codice.CM.SEIDInfo;
 
 namespace Nascimento.Dev
 {
@@ -56,30 +57,38 @@ namespace Nascimento.Dev
 
             UseScroll(() =>
             {
-                if (GUILayout.Button("Refresh List"))
+                try
                 {
-                    RefreshLevelSOs();
-                }
-
-
-                for (int i = 0; i < levelSOs.Count; i++)
-                {
-                    UseVertical(() =>
+                    if (GUILayout.Button("Refresh List"))
                     {
-                        GUILayout.Label(levelSOs[i].name, EditorStyles.boldLabel);
-                        EditorGUILayout.ObjectField(levelSOs[i], typeof(LevelSO), false);
+                        RefreshLevelSOs();
+                    }
 
-                        UseHorizontal(() =>
-                        {
-                            EditorGUILayout.LabelField($"Min: {levelSOs[i].minLvl}", GUILayout.Width(60));
-                            EditorGUILayout.LabelField($"Max: {levelSOs[i].maxLvl}", GUILayout.Width(60));
-                        }, _verticalPanel);
 
-                        if (levelSOs[i].Item != null)
+                    for (int i = 0; i < levelSOs.Count; i++)
+                    {
+                        UseVertical(() =>
                         {
-                            ShowItemSO(levelSOs[i].Item);
-                        }
-                    });
+                            GUILayout.Label(levelSOs[i].name, EditorStyles.boldLabel);
+                            EditorGUILayout.ObjectField(levelSOs[i], typeof(LevelSO), false);
+
+                            UseHorizontal(() =>
+                            {
+                                EditorGUILayout.LabelField($"Min: {levelSOs[i].minLvl}", GUILayout.Width(60));
+                                EditorGUILayout.LabelField($"Max: {levelSOs[i].maxLvl}", GUILayout.Width(60));
+                            }, _verticalPanel);
+
+                            if (levelSOs[i].Item != null)
+                            {
+                                ShowItemSO(levelSOs[i].Item);
+                            }
+                        });
+                    }
+                }
+                catch (Exception e)
+                {
+                    Debug.LogException(e);
+                    RefreshLevelSOs();
                 }
             });
         }

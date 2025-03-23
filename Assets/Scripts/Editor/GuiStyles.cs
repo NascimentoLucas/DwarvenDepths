@@ -55,7 +55,6 @@ namespace Nascimento.Dev
         {
             GUIStyle panelStyle = DefaultPanelStyle;
             Texture2D texture2D = new Texture2D(5, 5);
-            Debug.Log(color);
             for (int x = 0; x < texture2D.width; x++)
             {
                 for (int y = 0; y < texture2D.height; y++)
