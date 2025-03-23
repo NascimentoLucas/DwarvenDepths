@@ -58,27 +58,30 @@ namespace Nascimento.Game.Minion
             if (t >= 1f)
             {
                 _currentTarget = Vector3.zero;
-                _animator.SetFloat(SpeedKey, 0);
+                _animator.SetFloat(SpeedKey, _attr.GetStoppedValue());
             }
             else
             {
-                _animator.SetFloat(SpeedKey, 1);
+                _animator.SetFloat(SpeedKey, _attr.GetMovementSpeed(_lerpTime, Vector3.Distance(_startPosition, _currentTarget)));
             }
         }
 
         private void GenerateNewTarget()
         {
-            float randomX = UnityEngine.Random.Range(_handler.GetFloorMin().x, _handler.GetFloorMax().x);
-            float randomY = UnityEngine.Random.Range(_handler.GetFloorMin().y, _handler.GetFloorMax().y);
-            _currentTarget = new Vector3(randomX, randomY, _charSprite.transform.position.z);
+            Vector3 last = _currentTarget;
+            do
+            {
+                float randomX = UnityEngine.Random.Range(_handler.GetFloorMin().x, _handler.GetFloorMax().x);
+                float randomY = UnityEngine.Random.Range(_handler.GetFloorMin().y, _handler.GetFloorMax().y);
+                _currentTarget = new Vector3(randomX, randomY, _charSprite.transform.position.z);
+            } while (Vector3.Distance(last, _currentTarget) < _attr.MinWalkDistance);
             _waitTime = UnityEngine.Random.Range(0.5f, _attr.MaxDelay);
             _currentWaitTime = _waitTime;
 
-            // Reset lerp values when setting new target
             _startPosition = _charSprite.transform.position;
             _startPosition.y = _handler.GetFloorCenter().y;
             _currentTarget.y = _handler.GetFloorCenter().y;
-            _lerpTime = UnityEngine.Random.Range(1f, _attr.Speed);
+            _lerpTime = UnityEngine.Random.Range(1f, _attr.TranslationTime);
             _currentLerpTime = 0;
 
             Vector3 scale = _charSprite.transform.localScale;
