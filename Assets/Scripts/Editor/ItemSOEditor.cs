@@ -2,14 +2,17 @@ using UnityEngine;
 using UnityEditor;
 using Nascimento.Model;
 
-[CustomEditor(typeof(ItemSO))]
-public class ItemSOEditor : Editor
+namespace Nascimento.Dev
 {
-    public override void OnInspectorGUI()
+    [CustomEditor(typeof(ItemSO))]
+    public class ItemSOEditor : Editor
     {
-        DrawDefaultInspector();
-        var item = target as ItemSO;
-        EditorGUILayout.Space();
-        EditorGUILayout.LabelField("Description Preview:\n" + item.Description, GUILayout.Height(100));
+        public override void OnInspectorGUI()
+        {
+            DrawDefaultInspector();
+            var item = target as ItemSO;
+            EditorGUILayout.Space();
+            EditorGUILayout.LabelField("Description Preview:\n" + item.Description, GUILayout.Height(100));
+        }
     }
 }
