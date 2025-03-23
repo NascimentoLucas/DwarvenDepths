@@ -12,11 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a143cecc18ae18438a33e1d6b016858, type: 3}
   m_Name: Agua
   m_EditorClassIdentifier: 
-  <Name>k__BackingField: "Solo F\xE9rtil"
-  _descriptionText: '{1} + {2}  = {0}'
-  <Icon>k__BackingField: {fileID: 21300000, guid: 937d42efde3a6b64c8ca5c63a0d6df98, type: 3}
-  <Components>k__BackingField:
-  - <Item>k__BackingField: {fileID: 11400000, guid: 42ae403243ee6254ea98ed58caf6d699, type: 2}
-    <Amount>k__BackingField: 2
-  - <Item>k__BackingField: {fileID: 11400000}
-    <Amount>k__BackingField: 1
+  <Name>k__BackingField: "\xC1gua"
+  _descriptionText: '{0}'
+  <Icon>k__BackingField: {fileID: 21300000, guid: 0ab9281f2bed57044924b6cff69d95c1, type: 3}
+  <Components>k__BackingField: []
