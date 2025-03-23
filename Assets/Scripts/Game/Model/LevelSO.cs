@@ -5,7 +5,7 @@ namespace Nascimento.Model
 {
 
     [CreateAssetMenu(fileName = nameof(LevelSO), menuName = "Dev/SO/" + nameof(LevelSO))]
-    public class LevelSO : ScriptableObject
+    public partial class LevelSO : ScriptableObject
     {
         [field: Header("Setup")]
         [field: SerializeField]
