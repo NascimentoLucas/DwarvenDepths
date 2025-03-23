@@ -29,6 +29,8 @@ namespace Nascimento.Model
 
         [field: SerializeField]
         public Sprite Icon { get; private set; }
+        [field: SerializeField]
+        public ItemData[] Components { get; private set; }
 
     }
 }
