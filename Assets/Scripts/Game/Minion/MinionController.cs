@@ -51,6 +51,8 @@ namespace Nascimento.Game.Minion
 
             _currentLerpTime += Time.deltaTime;
             float t = Mathf.Clamp01(_currentLerpTime / _lerpTime);
+            _startPosition.y = _handler.GetFloorCenter().y;
+            _currentTarget.y = _handler.GetFloorCenter().y;
             _charSprite.transform.position = Vector3.Lerp(_startPosition, _currentTarget, t);
 
             if (t >= 1f)

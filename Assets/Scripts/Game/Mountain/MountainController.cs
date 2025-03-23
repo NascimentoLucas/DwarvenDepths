@@ -15,10 +15,10 @@ namespace Nascimento.Game.Mountain
         private Transform _content;
         [SerializeField]
         private Transform _spawnPoint;
-
-
-        [Header("Setup")]
         [SerializeField]
+        private ScrollManager _scrollManager;
+
+
         private LevelController[] _levels;
 
         void Start()
@@ -46,6 +46,7 @@ namespace Nascimento.Game.Mountain
                 position.y = _levels[i].Cave.FloorCenter.y;
                 position.x = _spawnPoint.position.x;
             }
+            _scrollManager.SetBottomItem(_levels[_levels.Length - 1].transform);
         }
     }
 }
