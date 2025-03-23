@@ -88,4 +88,19 @@ public class LevelSOUnityTest
         }
         yield return null;
     }
+    [UnityTest]
+    public IEnumerator CheckForStepsError()
+    {
+        string s;
+        foreach (var item in itens)
+        {
+            if (item.Value.Steps < 1)
+            {
+                var msg = $"Item {item.Value.name} tem um erro no número de passos";
+                Debug.Log(msg, item.Value);
+                Assert.Fail(msg);
+            }
+        }
+        yield return null;
+    }
 }

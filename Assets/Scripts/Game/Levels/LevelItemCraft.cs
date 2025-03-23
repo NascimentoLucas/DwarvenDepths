@@ -1,4 +1,5 @@
 using Nascimento.Model;
+using UnityEngine;
 
 namespace Nascimento.Game
 {
@@ -20,6 +21,8 @@ namespace Nascimento.Game
         private ItemSO _item;
         private CraftItem[] _craftItems;
 
+        private uint _steps;
+
         public LevelItemCraft(ItemSO item)
         {
             _item = item;
@@ -32,17 +35,52 @@ namespace Nascimento.Game
 
         public void GetItem(ICraftHandler handler)
         {
+            if (_item.Log)
+            {
+                Debug.Log($"Crafting {_item.Name} - Step {_steps}");
+            }
+
             for (int i = 0; i < _craftItems.Length; i++)
             {
                 if (_craftItems[i].AmountHave < _craftItems[i].AmountNeed)
                 {
                     var r = handler.GetItem(_craftItems[i].Item,
                     _craftItems[i].AmountNeed - _craftItems[i].AmountHave);
-                    if (!r)
+                    if (r)
+                    {
+                        _craftItems[i].AmountHave = _craftItems[i].AmountNeed;
+                    }
+                    else
+                    {
+                        if (_item.Log)
+                        {
+                            Debug.Log($"Failed to craft {_item.Name} - doest have {i}");
+                        }
+                        _steps = 0;
                         return;
+                    }
+
                 }
             }
-            handler.AddItem(_item, 1);
+
+            _steps++;
+            if (_item.Log)
+            {
+                Debug.Log($"Crafted {_item.Name} - Step {_steps}");
+            }
+            if (_steps >= _item.Steps)
+            {
+                _steps = 0;
+                for (int i = 0; i < _craftItems.Length; i++)
+                {
+                    _craftItems[i].AmountHave = 0;
+                }
+                handler.AddItem(_item, 1);
+                if (_item.Log)
+                {
+                    Debug.Log($"Crafted {_item.Name} - Step {_steps}");
+                }
+            }
         }
     }
 }

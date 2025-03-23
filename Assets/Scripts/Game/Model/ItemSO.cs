@@ -20,7 +20,7 @@ namespace Nascimento.Model
     [CreateAssetMenu(fileName = nameof(ItemSO), menuName = "Dev/SO/" + nameof(ItemSO))]
     public class ItemSO : ScriptableObject
     {
-        [field: Header("Setup")]
+        [field: Header("Setup.Details")]
         [field: SerializeField]
         public string Name { get; private set; }
 
@@ -29,8 +29,18 @@ namespace Nascimento.Model
 
         [field: SerializeField]
         public Sprite Icon { get; private set; }
+
+
+        [field: Header("Setup.Craft")]
+
+        [field: SerializeField]
+        public uint Steps { get; private set; } = 1;
         [field: SerializeField]
         public ItemData[] Components { get; private set; }
+#if UNITY_EDITOR
+        [field: SerializeField]
+        public bool Log { get; private set; } = false;
+#endif
 
 
         public string Description
