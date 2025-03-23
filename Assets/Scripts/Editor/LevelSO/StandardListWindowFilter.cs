@@ -16,18 +16,18 @@ namespace Nascimento.Dev
 
         public void CategoryLabel(LevelSO levelSO)
         {
-            if (levelSO.minLvl != lastLvl)
+            if (levelSO.MinLvl != lastLvl)
             {
                 GUILayout.Space(15);
-                GUILayout.Label($"Level {levelSO.minLvl}", EditorStyles.boldLabel);
+                GUILayout.Label($"Level {levelSO.MinLvl}", EditorStyles.boldLabel);
                 GUILayout.Space(15);
-                lastLvl = levelSO.minLvl;
+                lastLvl = levelSO.MinLvl;
             }
         }
 
         public void Sort(List<LevelSO> levelSOs)
         {
-            levelSOs.Sort((a, b) => a.minLvl.CompareTo(b.minLvl));
+            levelSOs.Sort((a, b) => a.MinLvl.CompareTo(b.MinLvl));
         }
     }
 }

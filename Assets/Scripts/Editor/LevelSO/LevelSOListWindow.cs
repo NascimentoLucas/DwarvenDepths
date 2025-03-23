@@ -111,8 +111,8 @@ namespace Nascimento.Dev
 
                             UseHorizontal(() =>
                             {
-                                EditorGUILayout.LabelField($"Min: {levelSOs[i].minLvl}", GUILayout.Width(60));
-                                EditorGUILayout.LabelField($"Max: {levelSOs[i].maxLvl}", GUILayout.Width(60));
+                                EditorGUILayout.LabelField($"Min: {levelSOs[i].MinLvl}", GUILayout.Width(60));
+                                EditorGUILayout.LabelField($"Max: {levelSOs[i].MaxLvl}", GUILayout.Width(60));
                             }, _verticalPanel);
 
                             if (levelSOs[i].Item != null)
