@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: LavaLevel
   m_EditorClassIdentifier: 
   <Item>k__BackingField: {fileID: 11400000, guid: f70b7f2edab7fef47be3849a4f416454, type: 2}
-  <Prefab>k__BackingField: {fileID: 7205253927726040678, guid: 734efa34848500b45b4b9e200ce9d700, type: 3}
+  <Prefab>k__BackingField: {fileID: 443186986119336232, guid: c9a2cc12c6e22e0478ebc561abe10006, type: 3}
   <MinLvl>k__BackingField: 20
   <MaxLvl>k__BackingField: 4294967295

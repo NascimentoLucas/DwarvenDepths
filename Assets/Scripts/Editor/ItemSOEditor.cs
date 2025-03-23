@@ -10,9 +10,11 @@ namespace Nascimento.Dev
         public override void OnInspectorGUI()
         {
             DrawDefaultInspector();
-            var item = target as ItemSO;
-            EditorGUILayout.Space();
-            EditorGUILayout.LabelField("Description Preview:\n" + item.Description, GUILayout.Height(100));
+            if (target is ItemSO item)
+            {
+                EditorGUILayout.Space();
+                EditorGUILayout.LabelField("Description Preview:\n" + item.Description, GUILayout.Height(100));
+            }
         }
     }
 }
