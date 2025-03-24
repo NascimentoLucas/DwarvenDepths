@@ -51,6 +51,7 @@ namespace Nascimento.Game.Mountain
                 level.transform.position = _spawnPoint.position;
                 level.name = sortedLevels[i].name;
                 _levels[i] = level;
+                _bag.AddItem(sortedLevels[i].Item, 0);
             }
 
 
