@@ -28,8 +28,20 @@ namespace Nascimento.Game.Level.Controller
         private LevelItemCraft _levelItemCraft;
 
         public CaveController Cave => _cave;
+
+
         private float _minionsRatio = 1;
         private bool _hasRemoved = true;
+        public float MinionsRatio
+        {
+            get => _minionsRatio;
+            set
+            {
+                _minionsRatio = value;
+                _levelView.SetText($"{MinionsRatio.ToString("00")}X");
+            }
+        }
+
 
         public Vector3 GetFloorCenter()
         {
@@ -49,7 +61,7 @@ namespace Nascimento.Game.Level.Controller
 
         public void Setup(LevelSO levelSO)
         {
-            _minionsRatio = 0;
+            MinionsRatio = 0;
             _levelSO = levelSO;
             _levelItemCraft = new LevelItemCraft(_levelSO.Item);
             var ratio = _cave.Setup(_attr);
@@ -66,7 +78,7 @@ namespace Nascimento.Game.Level.Controller
 
         internal void CraftItem(ICraftHandler handler)
         {
-            _levelItemCraft.GetItem(handler, (int)_minionsRatio);
+            _levelItemCraft.GetItem(handler, (int)MinionsRatio);
         }
 
 #if UNITY_EDITOR
@@ -83,8 +95,7 @@ namespace Nascimento.Game.Level.Controller
             if (_minionControllerPool.Get(transform) is MinionController minion)
             {
                 minion.SetHandler(this);
-                _minionsRatio += minion.Ratio;
-                _levelView.SetText($"{_minionsRatio}X");
+                MinionsRatio += minion.Ratio;
             }
         }
 
@@ -92,8 +103,7 @@ namespace Nascimento.Game.Level.Controller
         {
             if (_hasRemoved) return;
             _hasRemoved = true;
-            _minionsRatio -= minionController.Ratio;
-            _levelView.SetText($"{_minionsRatio}X");
+            MinionsRatio -= minionController.Ratio;
             _minionControllerPool.Return(minionController);
         }
 
