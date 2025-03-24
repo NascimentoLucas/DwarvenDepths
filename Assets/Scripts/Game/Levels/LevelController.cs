@@ -29,6 +29,7 @@ namespace Nascimento.Game.Level.Controller
 
         public CaveController Cave => _cave;
         private float _minionsRatio = 1;
+        private bool _hasRemoved = true;
 
         public Vector3 GetFloorCenter()
         {
@@ -89,6 +90,8 @@ namespace Nascimento.Game.Level.Controller
 
         public void UnspawnMinion(MinionController minionController)
         {
+            if (_hasRemoved) return;
+            _hasRemoved = true;
             _minionsRatio -= minionController.Ratio;
             _levelView.SetText($"{_minionsRatio}X");
             _minionControllerPool.Return(minionController);
@@ -96,6 +99,7 @@ namespace Nascimento.Game.Level.Controller
 
         public void OnMinusButtonPressed()
         {
+            _hasRemoved = false;
             MinionObserver.UnspawnMinion(transform);
         }
     }
