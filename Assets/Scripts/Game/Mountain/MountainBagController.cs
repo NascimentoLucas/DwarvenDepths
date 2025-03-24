@@ -10,7 +10,7 @@ namespace Nascimento.Game.Mountain
     public class MountainBagController : MonoBehaviour, ICraftHandler
     {
         [Header("Setup")]
-        [SerializeField] private ItemPanel _itemPanel;
+        [SerializeField] private BagPanel _itemPanel;
 
         private readonly Dictionary<ItemSO, int> _items = new Dictionary<ItemSO, int>();
         private readonly object _lock = new object();

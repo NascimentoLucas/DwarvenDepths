@@ -14,7 +14,7 @@ namespace Nascimento.Game.Level.View
     {
         [Header("Setup")]
         [SerializeField]
-        private PanelImage _prefabIcon;
+        private ProductionInfoView _prefabIcon;
         [SerializeField]
         private LayoutGroup _iconsContent;
         [SerializeField]
@@ -35,17 +35,17 @@ namespace Nascimento.Game.Level.View
             _text.text = text;
         }
 
-        public void AddImage(Sprite sprite)
+        public void AddImage(Sprite sprite, string text)
         {
             var image = Instantiate(_prefabIcon, _iconsContent.transform);
-            image.Setup(sprite);
+            image.Setup(sprite, text);
         }
 
-        public void AddLastImage(Sprite sprite)
+        public void AddLastImage(Sprite sprite, string text)
         {
             _equalSymbol.gameObject.SetActive(_iconsContent.transform.childCount > 1);
             var image = Instantiate(_prefabIcon, _iconsContent.transform);
-            image.Setup(sprite);
+            image.Setup(sprite, text);
             _equalSymbol.transform.SetAsLastSibling();
             image.transform.SetAsLastSibling();
         }

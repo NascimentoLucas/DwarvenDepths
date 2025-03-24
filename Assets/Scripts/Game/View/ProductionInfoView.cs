@@ -1,19 +1,21 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Nascimento.View
 {
-    public class PanelImage : MonoBehaviour
+    public class ProductionInfoView : MonoBehaviour
     {
         [Header("Setup")]
         [SerializeField]
         private Image _icon;
         [SerializeField]
-        private Image _background;
+        private TextMeshProUGUI _text;
 
-        public void Setup(Sprite icon)
+        public void Setup(Sprite icon, string text)
         {
             _icon.sprite = icon;
+            _text.text = text;
         }
     }
 }

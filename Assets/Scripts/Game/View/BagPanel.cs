@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace Nascimento.View
 {
-    public class ItemPanel : MonoBehaviour
+    public class BagPanel : MonoBehaviour
     {
         [Header("Setup")]
         [SerializeField]

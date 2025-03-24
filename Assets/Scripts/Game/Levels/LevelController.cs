@@ -65,9 +65,9 @@ namespace Nascimento.Game.Level.Controller
 
             for (int i = 0; i < _levelSO.Item.Components.Length; i++)
             {
-                _levelView.AddImage(_levelSO.Item.Components[i].Item.Icon);
+                _levelView.AddImage(_levelSO.Item.Components[i].Item.Icon, _levelSO.Item.Components[i].Amount.ToString("00"));
             }
-            _levelView.AddLastImage(_levelSO.Item.Icon);
+            _levelView.AddLastImage(_levelSO.Item.Icon, 1.ToString("00"));
         }
 
         internal void CraftItem(ICraftHandler handler)
