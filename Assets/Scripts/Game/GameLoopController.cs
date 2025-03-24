@@ -4,6 +4,7 @@ using Nascimento.View;
 using NaughtyAttributes;
 using TMPro;
 using UnityEngine;
+using Nascimento.Game.Minion;
 
 namespace Nascimento.Game
 {
@@ -16,6 +17,8 @@ namespace Nascimento.Game
         private MountainBagController _bagController;
         [SerializeField]
         private BagPanel _itemPanel;
+        [SerializeField]
+        private MinionControllerPool _minionControllerPool;
 
         [Header("Setup.UI")]
         [SerializeField]
@@ -24,6 +27,8 @@ namespace Nascimento.Game
         private TimerImage _timerImage;
         [SerializeField]
         private TextMeshProUGUI _scoreText;
+        [SerializeField]
+        private TextMeshProUGUI _minionPoolText;
 
         [Header("Game Design.Goal")]
         [SerializeField]
@@ -60,6 +65,11 @@ namespace Nascimento.Game
             Score = 0;
         }
 
+        private void FixedUpdate()
+        {
+            _minionPoolText.text = $"{_minionControllerPool.GetPoolSize()}";
+        }
+
         private void Update()
         {
             _timer -= Time.deltaTime;
@@ -71,6 +81,7 @@ namespace Nascimento.Game
                     if (_bagController.HasItem(_lastItem, _goal))
                     {
                         Score += _goal;
+                        _minionControllerPool.IncreasePoolSize(transform);
                     }
                 }
 

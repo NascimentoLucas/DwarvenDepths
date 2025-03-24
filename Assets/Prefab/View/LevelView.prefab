@@ -708,7 +708,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 4355076313861712296}
         m_TargetAssemblyTypeName: Nascimento.Game.Level.View.LevelView, Assembly-CSharp
-        m_MethodName: OnRemoveButtonPressed
+        m_MethodName: OnMinusButtonPressed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
