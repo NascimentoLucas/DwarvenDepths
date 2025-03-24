@@ -45,14 +45,6 @@ namespace Nascimento.Game.Level.Controller
             return _cave.FloorMin;
         }
 
-        public void OnButtonPressed()
-        {
-            var minion = _minionControllerPool.Get(transform);
-            minion.SetHandler(this);
-            _minionsRatio += minion.Ratio;
-            _levelView.SetText($"{_minionsRatio}X");
-        }
-
 
         public void Setup(LevelSO levelSO)
         {
@@ -68,13 +60,6 @@ namespace Nascimento.Game.Level.Controller
             }
             _levelView.AddLastImage(_levelSO.Item.Icon, 1.ToString("00"));
 
-
-#if UNITY_EDITOR
-            for (int i = 0; i < 10; i++)
-            {
-                OnButtonPressed();
-            }
-#endif
         }
 
 
@@ -90,5 +75,21 @@ namespace Nascimento.Game.Level.Controller
             Gizmos.DrawWireSphere(transform.position, 1f);
         }
 #endif
+
+
+        public void OnAddButtonPressed()
+        {
+            if (_minionControllerPool.Get(transform) is MinionController minion)
+            {
+                minion.SetHandler(this);
+                _minionsRatio += minion.Ratio;
+                _levelView.SetText($"{_minionsRatio}X");
+            }
+        }
+
+        public void OnMinusButtonPressed()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

@@ -7,7 +7,8 @@ namespace Nascimento.Game.Level.View
 {
     public interface ILevelViewHandler
     {
-        public void OnButtonPressed();
+        public void OnAddButtonPressed();
+        public void OnMinusButtonPressed();
     }
 
     public class LevelView : MonoBehaviour
@@ -50,9 +51,20 @@ namespace Nascimento.Game.Level.View
             image.transform.SetAsLastSibling();
         }
 
-        public void OnButtonPressed()
+        /// <summary>
+        /// Call by UI
+        /// </summary>
+        public void OnAddButtonPressed()
         {
-            _handler.OnButtonPressed();
+            _handler.OnAddButtonPressed();
+        }
+
+        /// <summary>
+        /// Call by UI
+        /// </summary>
+        public void OnMinusButtonPressed()
+        {
+            _handler.OnMinusButtonPressed();
         }
     }
 }
