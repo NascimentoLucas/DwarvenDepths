@@ -26,10 +26,13 @@ namespace Nascimento.Game.Level.Controller
 
         [SerializeField]
         private EnvironmentAttributes _attr;
+
+        private List<MinionController> _minions = new List<MinionController>();
         private LevelSO _levelSO;
         private LevelItemCraft _levelItemCraft;
 
         public CaveController Cave => _cave;
+        private float _minionsRatio = 1;
 
         public Vector3 GetFloorCenter()
         {
@@ -49,6 +52,7 @@ namespace Nascimento.Game.Level.Controller
         public void OnButtonPressed()
         {
             var minion = Instantiate(_prefabMinion, transform);
+            _minions.Add(minion);
             minion.SetHandler(this);
         }
 
@@ -62,7 +66,15 @@ namespace Nascimento.Game.Level.Controller
 
         internal void CraftItem(ICraftHandler handler)
         {
-            _levelItemCraft.GetItem(handler);
+            _minionsRatio = 0;
+            for (int i = 0; i < _minions.Count; i++)
+            {
+                _minionsRatio += _minions[i].Ratio;
+            }
+
+            _levelView.SetText($"{_minionsRatio}X");
+
+            _levelItemCraft.GetItem(handler, (int)_minionsRatio);
         }
 
 #if UNITY_EDITOR

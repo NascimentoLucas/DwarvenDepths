@@ -33,7 +33,7 @@ namespace Nascimento.Game.Level.Controller
             }
         }
 
-        public void GetItem(ICraftHandler handler)
+        public void GetItem(ICraftHandler handler, int minionsRatio)
         {
             for (int i = 0; i < _craftItems.Length; i++)
             {
@@ -54,7 +54,7 @@ namespace Nascimento.Game.Level.Controller
                 }
             }
 
-            _steps++;
+            _steps += (uint)(1 * minionsRatio);
             if (_steps >= _item.Steps)
             {
                 _steps = 0;

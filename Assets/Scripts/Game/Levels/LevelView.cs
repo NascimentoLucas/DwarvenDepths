@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,6 +14,8 @@ namespace Nascimento.Game.Level.View
         [Header("Setup")]
         [SerializeField]
         private Image _image;
+        [SerializeField]
+        private TextMeshProUGUI _text;
 
         private ILevelViewHandler _handler;
 
@@ -21,6 +24,11 @@ namespace Nascimento.Game.Level.View
             transform.localScale *= ratio;
             _handler = handler;
             _image.sprite = sprite;
+        }
+
+        public void SetText(string text)
+        {
+            _text.text = text;
         }
 
         public void OnButtonPressed()

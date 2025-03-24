@@ -23,6 +23,10 @@ namespace Nascimento.Game.Minion
         private Animator _animator;
 
 
+        [Header("Game Design")]
+        [SerializeField]
+        private float _ratio = 1.25f;
+
         private Vector3 _currentTarget;
         private Vector3 _startPosition;
 
@@ -31,6 +35,10 @@ namespace Nascimento.Game.Minion
         private float _lerpTime;
         private float _currentLerpTime;
         private IMinionCHandler _handler;
+
+        public float Ratio => _ratio;
+
+
 
         void Update()
         {
