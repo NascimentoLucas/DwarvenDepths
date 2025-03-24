@@ -1,6 +1,7 @@
 using Nascimento.Game.Mountain;
 using Nascimento.Model;
 using Nascimento.View;
+using NaughtyAttributes;
 using TMPro;
 using UnityEngine;
 
@@ -8,11 +9,15 @@ namespace Nascimento.Game
 {
     public class GameLoopController : MonoBehaviour
     {
-        [Header("Setup")]
+        [Header("Setup.Ref")]
         [SerializeField]
         private MountainController _mountainController;
         [SerializeField]
         private MountainBagController _bagController;
+        [SerializeField]
+        private BagPanel _itemPanel;
+
+        [Header("Setup.UI")]
         [SerializeField]
         private ItemView _itemView;
         [SerializeField]
@@ -32,17 +37,10 @@ namespace Nascimento.Game
         [SerializeField]
         private float _waitTimePerItemAmount = 1;
 
-
-        [Header("Debug")]
-        [SerializeField]
         private float _timer;
-        [SerializeField]
         private float _waitTime;
-        [SerializeField]
         private ItemSO _lastItem;
-        [SerializeField]
         private int _goal;
-        [SerializeField]
         private int _score;
 
         public int Score
@@ -95,7 +93,16 @@ namespace Nascimento.Game
             }
 
             _waitTime = (_waitTimePerItemAmount * _goal) * difficulty;
+            _itemPanel.SetAsFirstItem(_lastItem);
         }
+
+#if UNITY_EDITOR
+        [Button]
+        public void FinishTime()
+        {
+            _timer = 1;
+        }
+#endif
 
     }
 }

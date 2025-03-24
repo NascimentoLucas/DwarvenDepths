@@ -470,7 +470,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 3
-  m_Spacing: 0
+  m_Spacing: 15
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
@@ -1295,6 +1295,86 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemPanel: {fileID: 666826679}
+--- !u!1 &1248645913
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1248645914}
+  - component: {fileID: 1248645915}
+  m_Layer: 0
+  m_Name: ForceLayoutRebuilder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1248645914
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1248645913}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1610556635}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1248645915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1248645913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 392228845b7efb449a587407f1b174fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rebuilders:
+  - {fileID: 415124427}
+  - {fileID: 8868947467576476206}
+  - {fileID: 620352427}
+--- !u!1 &1610556634
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1610556635}
+  m_Layer: 0
+  m_Name: View
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1610556635
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1610556634}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 357.20306, y: 1158.9131, z: 4.7929344}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1248645914}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1640007711
 GameObject:
   m_ObjectHideFlags: 0
@@ -1565,6 +1645,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mountainController: {fileID: 1039744124}
   _bagController: {fileID: 1183956137}
+  _itemPanel: {fileID: 666826679}
   _itemView: {fileID: 1545563390720848318}
   _timerImage: {fileID: 1880534255}
   _scoreText: {fileID: 620352429}
@@ -1572,11 +1653,6 @@ MonoBehaviour:
   _maxGoal: 20
   _firstTurnWaitTime: 5
   _waitTimePerItemAmount: 1
-  _timer: 0
-  _waitTime: 0
-  _lastItem: {fileID: 0}
-  _goal: 0
-  _score: 0
 --- !u!1 &1996895639
 GameObject:
   m_ObjectHideFlags: 0
@@ -2116,4 +2192,5 @@ SceneRoots:
   - {fileID: 963194228}
   - {fileID: 638878281}
   - {fileID: 681915693}
+  - {fileID: 1610556635}
   - {fileID: 141797476}

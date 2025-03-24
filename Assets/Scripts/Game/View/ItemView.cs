@@ -25,7 +25,6 @@ namespace Nascimento.View
         internal void UpdateText(string text)
         {
             _text.text = text;
-            _text.ForceMeshUpdate();
         }
     }
 }

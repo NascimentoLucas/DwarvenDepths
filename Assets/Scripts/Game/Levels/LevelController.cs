@@ -63,7 +63,7 @@ namespace Nascimento.Game.Level.Controller
             var ratio = _cave.Setup(_attr);
             _levelView.Setup(this, ratio);
 
-            for (int i = 0; i < _levelSO.Item.Components.Length; i++)
+            for (int i = _levelSO.Item.Components.Length - 1; i >= 0; i--)
             {
                 _levelView.AddImage(_levelSO.Item.Components[i].Item.Icon, _levelSO.Item.Components[i].Amount.ToString("00"));
             }
