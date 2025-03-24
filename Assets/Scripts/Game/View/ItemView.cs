@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 namespace Nascimento.View
 {
+
     public class ItemView : MonoBehaviour
     {
         [Header("Setup")]

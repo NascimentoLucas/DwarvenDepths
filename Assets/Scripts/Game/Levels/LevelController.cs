@@ -61,7 +61,13 @@ namespace Nascimento.Game.Level.Controller
             _levelSO = levelSO;
             _levelItemCraft = new LevelItemCraft(_levelSO.Item);
             var ratio = _cave.Setup(_attr);
-            _levelView.Setup(this, ratio, _levelSO.Item.Icon);
+            _levelView.Setup(this, ratio);
+
+            for (int i = 0; i < _levelSO.Item.Components.Length; i++)
+            {
+                _levelView.AddImage(_levelSO.Item.Components[i].Item.Icon);
+            }
+            _levelView.AddLastImage(_levelSO.Item.Icon);
         }
 
         internal void CraftItem(ICraftHandler handler)
