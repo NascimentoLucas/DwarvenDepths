@@ -68,7 +68,16 @@ namespace Nascimento.Game.Level.Controller
                 _levelView.AddImage(_levelSO.Item.Components[i].Item.Icon, _levelSO.Item.Components[i].Amount.ToString("00"));
             }
             _levelView.AddLastImage(_levelSO.Item.Icon, 1.ToString("00"));
+
+
+#if UNITY_EDITOR
+            for (int i = 0; i < 10; i++)
+            {
+                OnButtonPressed();
+            }
+#endif
         }
+
 
         internal void CraftItem(ICraftHandler handler)
         {
