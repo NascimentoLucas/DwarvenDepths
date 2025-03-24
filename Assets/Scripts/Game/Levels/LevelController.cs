@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using Nascimento.Game.Minion;
 using Nascimento.Model;
 using UnityEngine;
@@ -21,13 +18,12 @@ namespace Nascimento.Game.Level.Controller
         private CaveController _cave;
         [SerializeField]
         private LevelView _levelView;
-        [SerializeField]
-        private MinionController _prefabMinion;
 
         [SerializeField]
         private EnvironmentAttributes _attr;
+        [SerializeField]
+        private MinionControllerPool _minionControllerPool;
 
-        private List<MinionController> _minions = new List<MinionController>();
         private LevelSO _levelSO;
         private LevelItemCraft _levelItemCraft;
 
@@ -51,13 +47,16 @@ namespace Nascimento.Game.Level.Controller
 
         public void OnButtonPressed()
         {
-            var minion = Instantiate(_prefabMinion, transform);
-            _minions.Add(minion);
+            var minion = _minionControllerPool.Get(transform);
             minion.SetHandler(this);
+            _minionsRatio += minion.Ratio;
+            _levelView.SetText($"{_minionsRatio}X");
         }
+
 
         public void Setup(LevelSO levelSO)
         {
+            _minionsRatio = 0;
             _levelSO = levelSO;
             _levelItemCraft = new LevelItemCraft(_levelSO.Item);
             var ratio = _cave.Setup(_attr);
@@ -81,14 +80,6 @@ namespace Nascimento.Game.Level.Controller
 
         internal void CraftItem(ICraftHandler handler)
         {
-            _minionsRatio = 0;
-            for (int i = 0; i < _minions.Count; i++)
-            {
-                _minionsRatio += _minions[i].Ratio;
-            }
-
-            _levelView.SetText($"{_minionsRatio}X");
-
             _levelItemCraft.GetItem(handler, (int)_minionsRatio);
         }
 

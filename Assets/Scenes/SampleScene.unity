@@ -1246,8 +1246,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ef4b90ea68eae8040a08bb130d9e6a01, type: 2}
   - {fileID: 11400000, guid: 970ba5f5d9244d540ba0475e6daed99f, type: 2}
   _scrollManager: {fileID: 1905027856}
-  _env: {fileID: 11400000, guid: 6b832b4cf65f0154d9492e0fa1cea3a8, type: 2}
   _bag: {fileID: 1183956137}
+  _env: {fileID: 11400000, guid: 6b832b4cf65f0154d9492e0fa1cea3a8, type: 2}
+  _minionControllerPool: {fileID: 11400000, guid: 0facf9274d47a9a4aae5bf497fa04258, type: 2}
   _content: {fileID: 202387824}
   _spawnPoint: {fileID: 252623581}
 --- !u!1 &1183956135

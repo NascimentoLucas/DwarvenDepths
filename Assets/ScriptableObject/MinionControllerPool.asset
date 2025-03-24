@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5c6d707f0e6bcd459a4f247516fbf90, type: 3}
+  m_Name: MinionControllerPool
+  m_EditorClassIdentifier: 
+  _prefabMinion: {fileID: 2954887940085108314, guid: 5a2ea4dd76deed34da2d9601a7002135, type: 3}
+  _initialSize: 10

@@ -48,8 +48,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cave: {fileID: 3228734255923933231}
   _levelView: {fileID: 4169900359532052281}
-  _prefabMinion: {fileID: 2954887940085108314, guid: 5a2ea4dd76deed34da2d9601a7002135, type: 3}
   _attr: {fileID: 11400000, guid: 6b832b4cf65f0154d9492e0fa1cea3a8, type: 2}
+  _minionControllerPool: {fileID: 11400000, guid: 0facf9274d47a9a4aae5bf497fa04258, type: 2}
 --- !u!1001 &409300479112091281
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -2,6 +2,7 @@ using Nascimento.Model;
 using UnityEngine;
 using System.Collections.Generic;
 using Nascimento.Game.Level.Controller;
+using Nascimento.Game.Minion;
 
 namespace Nascimento.Game.Mountain
 {
@@ -13,11 +14,14 @@ namespace Nascimento.Game.Mountain
         [SerializeField]
         private ScrollManager _scrollManager;
         [SerializeField]
-        private EnvironmentAttributes _env;
-
-        [SerializeField]
         private
         MountainBagController _bag;
+
+        [SerializeField]
+        [Header("Setup.SO")]
+        private EnvironmentAttributes _env;
+        [SerializeField]
+        private MinionControllerPool _minionControllerPool;
 
 
         [Header("Setup.Spanw")]
@@ -33,6 +37,7 @@ namespace Nascimento.Game.Mountain
 
         public void Start()
         {
+            _minionControllerPool.Initialize(transform);
             _levels = new LevelController[_levelSO.Length];
             var sortedLevels = new List<LevelSO>();
             sortedLevels.AddRange(_levelSO);
