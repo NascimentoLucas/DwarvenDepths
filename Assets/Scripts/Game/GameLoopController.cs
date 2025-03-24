@@ -1,6 +1,7 @@
 using Nascimento.Game.Mountain;
 using Nascimento.Model;
 using Nascimento.View;
+using TMPro;
 using UnityEngine;
 
 namespace Nascimento.Game
@@ -11,12 +12,15 @@ namespace Nascimento.Game
         [SerializeField]
         private MountainController _mountainController;
         [SerializeField]
+        private MountainBagController _bagController;
+        [SerializeField]
         private ItemView _itemView;
         [SerializeField]
         private TimerImage _timerImage;
+        [SerializeField]
+        private TextMeshProUGUI _scoreText;
 
-
-        [Header("Design.Time")]
+        [Header("Game Design.Goal")]
         [SerializeField]
         private int _minGoal = 1;
         [SerializeField]
@@ -24,44 +28,73 @@ namespace Nascimento.Game
 
         [Header("Design.Time")]
         [SerializeField]
-        private float _firstTimeToWait = 30f;
+        private float _firstTurnWaitTime = 5;
         [SerializeField]
-        private float _timeToWaitPerAmount = 1;
-        private float _timeToWait;
+        private float _waitTimePerItemAmount = 1;
+
+
+        [Header("Debug")]
+        [SerializeField]
         private float _timer;
+        [SerializeField]
+        private float _waitTime;
+        [SerializeField]
+        private ItemSO _lastItem;
+        [SerializeField]
         private int _goal;
+        [SerializeField]
+        private int _score;
+
+        public int Score
+        {
+            get => _score;
+            set
+            {
+                _score = value;
+                _scoreText.text = _score.ToString("000");
+            }
+        }
 
         private void Start()
         {
-            _timer = _firstTimeToWait;
-            _timeToWait = _timer;
+            _timer = _firstTurnWaitTime;
+            _waitTime = _timer;
+            Score = 0;
         }
 
         private void Update()
         {
             _timer -= Time.deltaTime;
+            _timerImage.SetTimer(_timer / _waitTime);
             if (_timer <= 0)
             {
-                _timer = _timeToWait;
-                CheckScore();
+                if (_lastItem != null)
+                {
+                    if (_bagController.HasItem(_lastItem, _goal))
+                    {
+                        Score += _goal;
+                    }
+                }
+
+                SetNextItem();
+                _timer = _waitTime;
             }
-            _timerImage.SetTimer(_timer / _timeToWait);
         }
 
-        private void CheckScore()
+        private void SetNextItem()
         {
-            ItemSO item = _mountainController.GetRandomItem();
+            _lastItem = _mountainController.GetRandomItem();
             _goal = UnityEngine.Random.Range(_minGoal, _maxGoal);
-            _itemView.Setup(item.Icon, $"Objetivo: {_goal.ToString("00")}");
+            _itemView.Setup(_lastItem.Icon, $"Objetivo: {_goal.ToString("00")}");
 
             float difficulty = 1;
 
-            for (int i = 0; i < item.Components.Length; i++)
+            for (int i = 0; i < _lastItem.Components.Length; i++)
             {
-                difficulty *= item.Components[i].Amount;
+                difficulty *= _lastItem.Components[i].Amount;
             }
 
-            _timeToWait = (_timeToWaitPerAmount * _goal) * difficulty;
+            _waitTime = (_waitTimePerItemAmount * _goal) * difficulty;
         }
 
     }

@@ -20,7 +20,6 @@ namespace Nascimento.View
         {
             _icon.sprite = icon;
             _text.text = text;
-            _text.ForceMeshUpdate();
         }
 
         internal void UpdateText(string text)

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Nascimento.View;
 using Nascimento.Game.Level.Controller;
+using System;
 
 
 namespace Nascimento.Game.Mountain
@@ -50,6 +51,21 @@ namespace Nascimento.Game.Mountain
                     }
                 }
                 return false;
+            }
+        }
+
+        internal bool HasItem(ItemSO item, int amount)
+        {
+            lock (_lock)
+            {
+                if (_items.ContainsKey(item))
+                {
+                    return _items[item] >= amount;
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
     }

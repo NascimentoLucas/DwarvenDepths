@@ -22,6 +22,7 @@ namespace Nascimento.Game.Level.Controller
         private CraftItem[] _craftItems;
 
         private uint _steps;
+        private bool _isBasicResource = false;
 
         public LevelItemCraft(ItemSO item)
         {
@@ -31,6 +32,7 @@ namespace Nascimento.Game.Level.Controller
             {
                 _craftItems[i] = new CraftItem(item.Components[i].Item, item.Components[i].Amount);
             }
+            _isBasicResource = item.Components.Length < 1;
         }
 
         public void GetItem(ICraftHandler handler, int minionsRatio)
@@ -62,7 +64,14 @@ namespace Nascimento.Game.Level.Controller
                 {
                     _craftItems[i].AmountHave = 0;
                 }
-                handler.AddItem(_item, 1);
+                if (_isBasicResource)
+                {
+                    handler.AddItem(_item, 1 * minionsRatio);
+                }
+                else
+                {
+                    handler.AddItem(_item, 1);
+                }
             }
         }
     }

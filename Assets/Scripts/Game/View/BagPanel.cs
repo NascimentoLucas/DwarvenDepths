@@ -13,6 +13,8 @@ namespace Nascimento.View
         private ItemView _prefab;
         [SerializeField]
         private LayoutGroup _content;
+        [SerializeField]
+        private RectTransform _root;
 
         private readonly Dictionary<ItemSO, ItemView> _items = new Dictionary<ItemSO, ItemView>();
 
