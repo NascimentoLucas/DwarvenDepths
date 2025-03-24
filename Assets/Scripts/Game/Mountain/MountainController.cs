@@ -59,6 +59,11 @@ namespace Nascimento.Game.Mountain
             _scrollManager.SetBottomItem(_levels[_levels.Length - 1].transform);
         }
 
+        internal ItemSO GetRandomItem()
+        {
+            return _levelSO[Random.Range(0, _levelSO.Length)].Item;
+        }
+
         private void Update()
         {
             _timer += Time.deltaTime;
