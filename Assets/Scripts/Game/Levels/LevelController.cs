@@ -87,9 +87,16 @@ namespace Nascimento.Game.Level.Controller
             }
         }
 
+        public void UnspawnMinion(MinionController minionController)
+        {
+            _minionsRatio -= minionController.Ratio;
+            _levelView.SetText($"{_minionsRatio}X");
+            _minionControllerPool.Return(minionController);
+        }
+
         public void OnMinusButtonPressed()
         {
-            throw new System.NotImplementedException();
+            MinionObserver.UnspawnMinion(transform);
         }
     }
 }

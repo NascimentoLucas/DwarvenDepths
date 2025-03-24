@@ -3,12 +3,22 @@ using UnityEngine;
 
 namespace Nascimento.Game.Minion
 {
+    public static class MinionObserver
+    {
+        public static event Action<Transform> OnUnspawnMinion;
+
+        public static void UnspawnMinion(Transform transform)
+        {
+            OnUnspawnMinion?.Invoke(transform);
+        }
+    }
 
     public interface IMinionCHandler
     {
         public Vector3 GetFloorMin();
         public Vector3 GetFloorMax();
         public Vector3 GetFloorCenter();
+        void UnspawnMinion(MinionController minionController);
     }
 
     public class MinionController : MonoBehaviour
@@ -21,7 +31,6 @@ namespace Nascimento.Game.Minion
         private MinionAttributes _attr;
         [SerializeField]
         private Animator _animator;
-
 
         [Header("Game Design")]
         [SerializeField]
@@ -38,7 +47,20 @@ namespace Nascimento.Game.Minion
 
         public float Ratio => _ratio;
 
+        private void OnEnable()
+        {
+            MinionObserver.OnUnspawnMinion += OnUnspawnMinion;
+        }
 
+        private void OnDisable()
+        {
+            MinionObserver.OnUnspawnMinion -= OnUnspawnMinion;
+        }
+
+        void OnDestroy()
+        {
+            MinionObserver.OnUnspawnMinion -= OnUnspawnMinion;
+        }
 
         void Update()
         {
@@ -109,6 +131,14 @@ namespace Nascimento.Game.Minion
         internal void SetHandler(IMinionCHandler handler)
         {
             _handler = handler;
+        }
+
+        private void OnUnspawnMinion(Transform possibleParent)
+        {
+            if (transform.parent.GetInstanceID().Equals(possibleParent.GetInstanceID()))
+            {
+                _handler.UnspawnMinion(this);
+            }
         }
     }
 }
