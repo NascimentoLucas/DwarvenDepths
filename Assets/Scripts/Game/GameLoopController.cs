@@ -63,6 +63,7 @@ namespace Nascimento.Game
             _timer = _firstTurnWaitTime;
             _waitTime = _timer;
             Score = 0;
+            Screen.sleepTimeout = SleepTimeout.NeverSleep;
         }
 
         private void FixedUpdate()
