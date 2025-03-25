@@ -36,7 +36,7 @@ namespace Nascimento.Game.Minion
         [SerializeField]
         private float _ratio = 1.25f;
 
-        private Vector3 _currentTarget;
+        private Vector3 _endPosition;
         private Vector3 _startPosition;
 
         private float _waitTime;
@@ -66,7 +66,7 @@ namespace Nascimento.Game.Minion
         {
             if (_handler == null) return;
 
-            if (_currentTarget == Vector3.zero)
+            if (_endPosition == Vector3.zero)
             {
                 if (_currentWaitTime <= 0)
                 {
@@ -82,41 +82,41 @@ namespace Nascimento.Game.Minion
             _currentLerpTime += Time.deltaTime;
             float t = Mathf.Clamp01(_currentLerpTime / _lerpTime);
             _startPosition.y = _handler.GetFloorCenter().y;
-            _currentTarget.y = _handler.GetFloorCenter().y;
-            _charSprite.transform.position = Vector3.Lerp(_startPosition, _currentTarget, t);
+            _endPosition.y = _handler.GetFloorCenter().y;
+            _charSprite.transform.position = Vector3.Lerp(_startPosition, _endPosition, t);
 
             if (t >= 1f)
             {
-                _currentTarget = Vector3.zero;
+                _endPosition = Vector3.zero;
                 _animator.SetFloat(SpeedKey, _attr.GetStoppedValue());
             }
             else
             {
-                _animator.SetFloat(SpeedKey, _attr.GetMovementSpeed(_lerpTime, Vector3.Distance(_startPosition, _currentTarget)));
+                _animator.SetFloat(SpeedKey, _attr.GetMovementSpeed(_lerpTime, Vector3.Distance(_startPosition, _endPosition)));
             }
         }
 
         private void GenerateNewTarget()
         {
-            Vector3 last = _currentTarget;
+            Vector3 last = _endPosition;
             do
             {
                 float randomX = UnityEngine.Random.Range(_handler.GetFloorMin().x, _handler.GetFloorMax().x);
                 float randomY = UnityEngine.Random.Range(_handler.GetFloorMin().y, _handler.GetFloorMax().y);
-                _currentTarget = new Vector3(randomX, randomY, _charSprite.transform.position.z);
-            } while (Vector3.Distance(last, _currentTarget) < _attr.MinWalkDistance);
+                _endPosition = new Vector3(randomX, randomY, _charSprite.transform.position.z);
+            } while (Vector3.Distance(last, _endPosition) < _attr.MinWalkDistance);
             _waitTime = UnityEngine.Random.Range(0.5f, _attr.MaxDelay);
             _currentWaitTime = _waitTime;
 
             _startPosition = _charSprite.transform.position;
             _startPosition.y = _handler.GetFloorCenter().y;
-            _currentTarget.y = _handler.GetFloorCenter().y;
+            _endPosition.y = _handler.GetFloorCenter().y;
             _lerpTime = UnityEngine.Random.Range(1f, _attr.TranslationTime);
             _currentLerpTime = 0;
 
             Vector3 scale = _charSprite.transform.localScale;
 
-            if (_currentTarget.x < _startPosition.x)
+            if (_endPosition.x < _startPosition.x)
             {
                 scale.x = -Mathf.Abs(scale.x);
             }
@@ -131,6 +131,10 @@ namespace Nascimento.Game.Minion
         internal void SetHandler(IMinionCHandler handler)
         {
             _handler = handler;
+            _startPosition = _handler.GetFloorCenter();
+            _charSprite.transform.position = _startPosition;
+            _endPosition = _startPosition;
+
         }
 
         private void OnUnspawnMinion(Transform possibleParent)

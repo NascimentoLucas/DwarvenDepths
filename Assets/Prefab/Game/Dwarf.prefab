@@ -116,6 +116,7 @@ GameObject:
   m_Component:
   - component: {fileID: 298835962147130917}
   - component: {fileID: 2954887940085108314}
+  - component: {fileID: 1127271667801845769}
   m_Layer: 0
   m_Name: Dwarf
   m_TagString: Untagged
@@ -155,3 +156,18 @@ MonoBehaviour:
   _attr: {fileID: 11400000, guid: 10ba1c738cd76b641966ee2e4d600139, type: 2}
   _animator: {fileID: 6979497448744850014}
   _ratio: 1.1
+--- !u!114 &1127271667801845769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8726830859416631228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5ebd3f7caa49464285852dcf19d3007, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 6979497448744850014}
+  _layerIndex: 1
+  _duration: 2
