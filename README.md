@@ -11,7 +11,7 @@ Implementei uma janela no editor para visualizar todos os itens criados no proje
 ## Experiencia do usuário 
 Foquei em proporcionar uma melhor experiência ao usuário com a UI. Para isso, implementei recursos como a contagem de minions e a ordenação automática da lista de recursos conforme o objetivo.
 
-# Assets
+# 📦 Assets
 * [Pixel Prototype Player Sprites](https://assetstore.unity.com/packages/2d/characters/pixel-prototype-player-sprites-221542)
 * [Pixel Caves](https://assetstore.unity.com/packages/2d/environments/pixel-caves-136235)
 * [Cartoon Ground and Floor Textures](https://assetstore.unity.com/packages/2d/textures-materials/floors/cartoon-ground-and-floor-textures-68398)
