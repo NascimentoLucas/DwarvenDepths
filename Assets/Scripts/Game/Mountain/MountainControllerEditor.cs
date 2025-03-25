@@ -28,6 +28,27 @@ namespace Nascimento.Game.Mountain
             _levelSO = levelSOs.ToArray();
             EditorUtility.SetDirty(this);
         }
+
+
+        [Button]
+        public void SortLevels()
+        {
+            if (_levelSO == null || _levelSO.Length < 1) return;
+
+            List<LevelSO> levelSOs = new List<LevelSO>();
+            levelSOs.AddRange(_levelSO);
+            levelSOs.Sort((a, b) =>
+            {
+                if (a.Item.Components != null && b.Item.Components != null)
+                {
+                    return a.Item.Components.Length.CompareTo(b.Item.Components.Length);
+                }
+
+                return a.MinLvl.CompareTo(b.MinLvl);
+            });
+            _levelSO = levelSOs.ToArray();
+            EditorUtility.SetDirty(this);
+        }
     }
 }
 #endif
