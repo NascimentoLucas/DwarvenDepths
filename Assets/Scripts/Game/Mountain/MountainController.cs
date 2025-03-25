@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using Nascimento.Game.Level.Controller;
 using Nascimento.Game.Minion;
+using UnityEditor;
 
 namespace Nascimento.Game.Mountain
 {
@@ -30,7 +31,7 @@ namespace Nascimento.Game.Mountain
         private Transform _content;
         [SerializeField]
         private Transform _spawnPoint;
-        private LevelController[] _levels;
+        private LevelController[] _levelControllers;
 
         private float _timer;
         private float _delay = 1f;
@@ -38,31 +39,32 @@ namespace Nascimento.Game.Mountain
         public void Start()
         {
             _minionControllerPool.Initialize(transform);
-            _levels = new LevelController[_levelSO.Length];
-            var sortedLevels = new List<LevelSO>();
-            sortedLevels.AddRange(_levelSO);
-            sortedLevels.Sort((a, b) => a.MinLvl.CompareTo(b.MinLvl));
+            _levelControllers = new LevelController[_levelSO.Length];
+            List<LevelSO> levelSOs = new List<LevelSO>();
+            levelSOs.AddRange(_levelSO);
+            _levelSO = levelSOs.ToArray();
 
 
-            for (int i = 0; i < sortedLevels.Count; i++)
+            for (int i = 0; i < _levelSO.Length; i++)
             {
-                var level = Instantiate(sortedLevels[i].Prefab, _content);
-                level.Setup(sortedLevels[i]);
+                var level = Instantiate(_levelSO[i].Prefab, _content);
+                level.Setup(_levelSO[i]);
                 level.transform.position = _spawnPoint.position;
-                level.name = sortedLevels[i].name;
-                _levels[i] = level;
-                _bag.AddItem(sortedLevels[i].Item, 0);
+                level.name = _levelSO[i].name;
+                _levelControllers[i] = level;
+                _bag.AddItem(_levelSO[i].Item, 0);
             }
 
 
             Vector3 position = _spawnPoint.position;
-            for (int i = 0; i < _levels.Length; i++)
+            for (int i = 0; i < _levelControllers.Length; i++)
             {
-                _levels[i].transform.position = position;
-                position.y = _levels[i].Cave.FloorCenter.y;
+                _levelControllers[i].transform.position = position;
+                position.y = _levelControllers[i].Cave.FloorCenter.y;
                 position.x = _spawnPoint.position.x;
             }
-            _scrollManager.SetBottomItem(_levels[_levels.Length - 1].transform);
+            _scrollManager.SetBottomItem(_levelControllers[_levelControllers.Length - 1].transform);
+            
         }
 
         internal ItemSO GetRandomItem()
@@ -83,9 +85,9 @@ namespace Nascimento.Game.Mountain
 
         private void UpdateMountain()
         {
-            for (int i = 0; i < _levels.Length; i++)
+            for (int i = 0; i < _levelControllers.Length; i++)
             {
-                _levels[i].CraftItem(_bag);
+                _levelControllers[i].CraftItem(_bag);
             }
         }
     }

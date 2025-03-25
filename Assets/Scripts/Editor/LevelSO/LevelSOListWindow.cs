@@ -73,30 +73,31 @@ namespace Nascimento.Dev
 
         private void OnGUI()
         {
-
-            GUILayout.Label("Level Scriptable Objects", EditorStyles.boldLabel);
-            if (GUILayout.Button("Refresh List"))
-            {
-                RefreshLevelSOs();
-            }
-            UseHorizontal(() =>
-            {
-                if (GUILayout.Button("Remover filtro"))
-                {
-                    _filter = new StandardListWindowFilter();
-                    RefreshLevelSOs();
-                }
-                if (GUILayout.Button("Filtrar multiplos componentes"))
-                {
-                    _filter = new MultipleComponentFilter();
-                    RefreshLevelSOs();
-                }
-            });
-
             UseScroll(() =>
             {
                 try
                 {
+
+                    GUILayout.Label("Level Scriptable Objects", EditorStyles.boldLabel);
+                    if (GUILayout.Button("Refresh List"))
+                    {
+                        RefreshLevelSOs();
+                    }
+
+                    UseHorizontal(() =>
+                    {
+                        GUILayout.Label("Filtros", EditorStyles.boldLabel);
+                        if (GUILayout.Button("Remover filtro"))
+                        {
+                            _filter = new StandardListWindowFilter();
+                            RefreshLevelSOs();
+                        }
+                        if (GUILayout.Button("Filtrar multiplos componentes"))
+                        {
+                            _filter = new MultipleComponentFilter();
+                            RefreshLevelSOs();
+                        }
+                    });
 
                     for (int i = 0; i < levelSOs.Count; i++)
                     {
@@ -108,12 +109,6 @@ namespace Nascimento.Dev
 
                             GUILayout.Label(levelSOs[i].name, EditorStyles.boldLabel);
                             EditorGUILayout.ObjectField(levelSOs[i], typeof(LevelSO), false);
-
-                            UseHorizontal(() =>
-                            {
-                                EditorGUILayout.LabelField($"Min: {levelSOs[i].MinLvl}", GUILayout.Width(60));
-                                EditorGUILayout.LabelField($"Max: {levelSOs[i].MaxLvl}", GUILayout.Width(60));
-                            }, _verticalPanel);
 
                             if (levelSOs[i].Item != null)
                             {

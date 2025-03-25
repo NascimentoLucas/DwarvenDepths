@@ -7,7 +7,7 @@ namespace Nascimento.Dev
 {
     public class StandardListWindowFilter : IListWindowFilter
     {
-        private uint lastLvl = uint.MinValue;
+        private int lastLvl = int.MinValue;
 
         public bool CanShow(LevelSO levelSO)
         {
@@ -16,18 +16,24 @@ namespace Nascimento.Dev
 
         public void CategoryLabel(LevelSO levelSO)
         {
-            if (levelSO.MinLvl != lastLvl)
+            var aValue = 0;
+            if (levelSO.Item.Components == null)
+                aValue = -1;
+            else
+                aValue = levelSO.Item.Components.Length;
+
+            if (aValue != lastLvl)
             {
                 GUILayout.Space(15);
-                GUILayout.Label($"Level {levelSO.MinLvl}", EditorStyles.boldLabel);
+                GUILayout.Label($"Components {aValue}", EditorStyles.boldLabel);
                 GUILayout.Space(15);
-                lastLvl = levelSO.MinLvl;
+                lastLvl = aValue;
             }
         }
 
         public void Sort(List<LevelSO> levelSOs)
         {
-            levelSOs.Sort((a, b) => a.MinLvl.CompareTo(b.MinLvl));
+            levelSOs.Sort();
         }
     }
 }
