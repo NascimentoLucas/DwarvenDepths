@@ -143,6 +143,7 @@ namespace Nascimento.Dev
             UseVertical(() =>
             {
                 GUILayout.Label($"{item.name}:\n{item.Description}");
+                GUILayout.Label($"Steps: {item.Steps}");
                 ShowItem(item);
                 if (item.Components != null &&
                 item.Components.Length > 0)
