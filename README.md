@@ -16,5 +16,5 @@ Foquei em proporcionar uma melhor experiência ao usuário com a UI. Para isso, 
 * [Pixel Caves](https://assetstore.unity.com/packages/2d/environments/pixel-caves-136235)
 * [Cartoon Ground and Floor Textures](https://assetstore.unity.com/packages/2d/textures-materials/floors/cartoon-ground-and-floor-textures-68398)
 
-#🐛 Fixes
+# 🐛 Fixes
 Hoje a pool de minions está em um SO, o que pode ocasionar vazamento de memória no editor, o próximo passo é atualizar esse sistema para impedir isso.
